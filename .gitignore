@@ -8,6 +8,9 @@
 Thumbs.db
 ehthumbs.db
 
+# Dependency directory
+node_modules
+
 # WebStorm
 
 .idea

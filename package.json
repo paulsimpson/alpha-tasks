@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/paulsimpson/alpha-tasks/issues"
   },
-  "homepage": "https://github.com/paul-simpson/alpha-tasks"
+  "homepage": "https://github.com/paul-simpson/alpha-tasks",
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  }
 }

@@ -1,3 +1,13 @@
-.idea
+# OSX
+
 .DS_Store
+
+# Windows
+
+# Windows image file caches
 Thumbs.db
+ehthumbs.db
+
+# WebStorm
+
+.idea

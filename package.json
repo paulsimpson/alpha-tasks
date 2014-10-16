@@ -1,0 +1,17 @@
+{
+  "name": "alpha-tasks",
+  "version": "0.0.0",
+  "description": "Task management app",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paulsimpson/alpha-tasks.git"
+  },
+  "keywords": [
+    "tasks"
+  ],
+  "author": "Paul Simpson <paulnsimpson@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/paulsimpson/alpha-tasks/issues"
+  },
+  "homepage": "https://github.com/paul-simpson/alpha-tasks"
+}

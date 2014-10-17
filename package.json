@@ -10,6 +10,7 @@
     "tasks"
   ],
   "author": "Paul Simpson <paulnsimpson@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/paulsimpson/alpha-tasks/issues"
   },

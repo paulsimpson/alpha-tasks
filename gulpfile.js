@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 var bundler;
 function getBundler() {
   if (!bundler) {
-    bundler = watchify(browserify('./src/main.js', _.extend({ debug: true }, watchify.args)));
+    bundler = watchify(browserify('./frontend/main.js', _.extend({ debug: true }, watchify.args)));
 
     bundler.plugin(remapify, [
       {
@@ -27,7 +27,7 @@ function bundle() {
   return getBundler().bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./public/dist'));
 }
 
 gulp.task('scripts', function () {

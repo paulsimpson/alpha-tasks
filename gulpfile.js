@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+  $ = require('gulp-load-plugins')(),
   browserify = require('browserify'),
   watchify = require('watchify'),
   remapify = require('remapify'),
@@ -6,6 +7,14 @@ var gulp = require('gulp'),
   path = require('path'),
   buffer = require('vinyl-buffer'),
   _ = require('lodash');
+
+gulp.task('styles', function () {
+  return gulp.src('./frontend/main.less')
+    .pipe($.less())
+    .pipe($.autoprefixer())
+    .pipe($.rename('bundle.css'))
+    .pipe(gulp.dest('./public/dist'));
+});
 
 var bundler;
 function getBundler() {
@@ -34,10 +43,16 @@ gulp.task('scripts', function () {
   return bundle();
 });
 
-gulp.task('watch', function () {
+gulp.task('build', [
+  'styles'
+]);
+
+gulp.task('watch', ['build'], function () {
   getBundler().on('update', function () {
     gulp.start('scripts');
   });
+
+  gulp.watch('./frontend/main.less', ['styles']);
 });
 
 gulp.task('default', ['watch']);

@@ -9,8 +9,8 @@ var gulp = require('gulp'),
   _ = require('lodash');
 
 gulp.task('styles', function () {
-  return gulp.src('./frontend/main.less')
-    .pipe($.less())
+  return gulp.src('./frontend/main.scss')
+    .pipe($.sass({errLogToConsole: true}))
     .pipe($.autoprefixer())
     .pipe($.rename('bundle.css'))
     .pipe(gulp.dest('./public/dist'));

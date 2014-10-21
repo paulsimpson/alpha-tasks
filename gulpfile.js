@@ -16,6 +16,11 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('./public/dist'));
 });
 
+gulp.task('icons', function () { 
+  return gulp.src('./bower_components/components-font-awesome/fonts/**.*') 
+    .pipe(gulp.dest('./public/fonts')); 
+});
+
 var bundler;
 function getBundler() {
   if (!bundler) {
@@ -34,6 +39,7 @@ function getBundler() {
 
 function bundle() {
   return getBundler().bundle()
+    .on('error', $.util.log)
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(gulp.dest('./public/dist'));
@@ -44,6 +50,7 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('build', [
+  'icons',
   'styles'
 ]);
 

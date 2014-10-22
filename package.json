@@ -29,6 +29,7 @@
     "gulp-sass": "^1.2.0",
     "gulp-template-compile": "^0.2.1",
     "gulp-util": "^3.0.1",
+    "jstify": "^0.7.0",
     "lodash": "^2.4.1",
     "remapify": "^1.3.0",
     "vinyl-buffer": "^1.0.0",

@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
   $ = require('gulp-load-plugins')(),
-  template = require('gulp-template-compile'),
   browserify = require('browserify'),
   watchify = require('watchify'),
   remapify = require('remapify'),
@@ -8,17 +7,6 @@ var gulp = require('gulp'),
   path = require('path'),
   buffer = require('vinyl-buffer'),
   _ = require('lodash');
-
-gulp.task('templates', function () {
-  return gulp.src('./frontend/**/*.html')
-    .pipe(template({
-      name: function (file) {
-        return file.relative.replace("modules/", "").replace('templates/', '').replace('.html', '')
-      }
-    }))
-    .pipe($.concat('templates.js'))
-    .pipe(gulp.dest('./public/dist'));
-});
 
 gulp.task('styles', function () {
   return gulp.src('./frontend/main.scss')
@@ -50,7 +38,9 @@ function getBundler() {
 }
 
 function bundle() {
-  return getBundler().bundle()
+  return getBundler()
+    .transform('jstify', { engine: 'lodash' })
+    .bundle()
     .on('error', $.util.log)
     .pipe(source('bundle.js'))
     .pipe(buffer())
@@ -67,12 +57,10 @@ gulp.task('build', [
 ]);
 
 gulp.task('watch', ['build'], function () {
-  getBundler().on('update', function () {
-    gulp.start('scripts');
-  });
+  getBundler().on('update', bundle);
 
   gulp.watch('./frontend/main.less', ['styles']);
-  gulp.watch('./frontend/', ['templates']);
+  gulp.watch('./frontend/**/*.html', ['scripts']);
 });
 
 gulp.task('default', ['watch']);

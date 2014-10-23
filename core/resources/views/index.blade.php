@@ -15,9 +15,9 @@
 <div class="application"></div>
 <script src="{{ asset('dist/bundle.js') }}"></script>
 <script type="text/javascript">
-		$(document).ready(function() {
-			Tasks.start();
-		});
-	</script>
+	$(document).ready(function() {
+		Tasks.start();
+	});
+</script>
 </body>
 </html>

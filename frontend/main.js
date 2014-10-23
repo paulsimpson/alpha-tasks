@@ -1,2 +1,8 @@
 var Backbone = require('backbone');
-Backbone.$ = require('jquery');
+Backbone.$ = global.$ = require('jquery');
+
+var Application = require('./application/application');
+
+var app = new Application();
+
+global.Tasks = app;

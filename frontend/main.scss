@@ -2,3 +2,9 @@
 @import "bower_components/components-font-awesome/scss/font-awesome";
 
 $fa-font-path:"../fonts";
+
+@import "modules/header/style";
+
+body {
+  background: #f9f9f9;
+}

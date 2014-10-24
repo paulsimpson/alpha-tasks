@@ -14,6 +14,11 @@ module.exports = Marionette.Application.extend({
   },
 
   start: function(options) {
-    return this.layout.render();
+    this.layout.render();
+
+    this.module('header', {
+      moduleClass: require('../modules/header/module'),
+      region: this.layout.header
+    });
   }
 });

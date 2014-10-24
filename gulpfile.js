@@ -24,22 +24,23 @@ gulp.task('icons', function () { 
 var bundler;
 function getBundler() {
   if (!bundler) {
-    bundler = watchify(browserify('./frontend/main.js', _.extend({ debug: true }, watchify.args)));
+    bundler = watchify(browserify('./frontend/main.js', _.extend({ debug: true }, watchify.args)))
 
-    bundler.plugin(remapify, [
+    .plugin(remapify, [
       {
         src: '**/*.js',
         expose: 'src',
         cwd: path.join(__dirname, 'src')
       }
-    ]);
+    ])
+    .transform('jstify', { engine: 'lodash' });
   }
   return bundler;
 }
 
+
 function bundle() {
   return getBundler()
-    .transform('jstify', { engine: 'lodash' })
     .bundle()
     .on('error', $.util.log)
     .pipe(source('bundle.js'))
@@ -47,19 +48,21 @@ function bundle() {
     .pipe(gulp.dest('./public/dist'));
 }
 
-gulp.task('scripts', function () {
-  return bundle();
-});
+gulp.task('scripts', bundle);
 
 gulp.task('build', [
   'icons',
-  'styles'
+  'styles',
+  'scripts'
 ]);
 
 gulp.task('watch', ['build'], function () {
-  getBundler().on('update', bundle);
 
-  gulp.watch('./frontend/main.less', ['styles']);
+  getBundler().on('update', function () {
+    gulp.start('scripts');
+  });
+
+  gulp.watch('./frontend/**/*.scss', ['styles']);
   gulp.watch('./frontend/**/*.html', ['scripts']);
 });
 
